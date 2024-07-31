@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Preloading Messages Example</title>
+</head>
+<body>
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+<div id="preload_msgs">Loading canvas, please wait...</div>
+
+<script>
+// JavaScript to handle preloading messages
+
+// Select the preload messages element
+let preload_text = document.querySelector("#preload_msgs");
+
+// Function to hide the preload message
+function hidePreloadMessage() {
+    preload_text.style.display = 'none';
+}
+
+// Function to show the preload message
+function showPreloadMessage() {
+    preload_text.style.display = 'block';
+}
+
+// Simulate a loading process (e.g., loading assets or drawing on canvas)
+setTimeout(function() {
+    // Hide the preload message after 3 seconds
+    hidePreloadMessage();
+    // Proceed with canvas drawing or other operations
+    drawOnCanvas();
+}, 3000);
+
+// Function to draw something on the canvas
+function drawOnCanvas() {
+    const canvas = document.getElementById('myCanvas');
+
+    if (canvas.getContext) {
+        const context = canvas.getContext('2d');
+        
+        const x = 50;
+        const y = 50;
+        const l = 100;
+        const t = 75;
+        
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(x + l, y + t);
+        context.stroke();
+    } else {
+        alert("Your browser does not support HTML5 Canvas.");
+    }
+}
+
+// Initially show the preload message
+showPreloadMessage();
+</script>
+</body>
+</html>
