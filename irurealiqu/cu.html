@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scale Domain Construction Example</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <script>
+        const data = [10, 20, 30, 40, 50];
+
+        // Create a linear scale
+        const xScale = d3.scaleLinear()
+            .range([0, 100]);
+
+        // Construct the domain based on data
+        xScale.domain(d3.extent(data));
+
+        // Use the scale to map data values to pixel positions
+        data.forEach(d => {
+            console.log(`Data value: ${d}, Scaled value: ${xScale(d)}`);
+        });
+
+        // Drawing circles to visualize the scaled values
+        const svg = d3.select("body").append("svg")
+            .attr("width", 200)
+            .attr("height", 50);
+
+        svg.selectAll("circle")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", d => xScale(d))
+            .attr("cy", 25)
+            .attr("r", 5);
+    </script>
+</body>
+</html>
